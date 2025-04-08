@@ -62,4 +62,3 @@
     letter-spacing: 0.0125em;
   }
   </style>
-  

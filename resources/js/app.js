@@ -1,9 +1,19 @@
-import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.css'; // Импортируем Bootstrap CSS
+import 'bootstrap/dist/js/bootstrap.js';   // Импортируем Bootstrap JS, если нужно
+import 'vuetify/styles'; // Глобальные стили Vuetify
 import { createApp } from 'vue';
-import vuetify from './plugins/vuetify';
+import { createVuetify } from 'vuetify';
+import * as components from 'vuetify/components';
+import * as directives from 'vuetify/directives';
+import customVuetify from './plugins/vuetify'; // Импортируем настроенный Vuetify
 import ExampleComponent from './components/ExampleComponent.vue';
 
+const vuetifyInstance = createVuetify({
+    components,
+    directives,
+});
+
 const app = createApp({});
-app.use(vuetify);
+app.use(customVuetify);
 app.component('example-component', ExampleComponent);
 app.mount('#app');
