@@ -6,7 +6,7 @@ import { createVuetify } from 'vuetify';
 import * as components from 'vuetify/components';
 import * as directives from 'vuetify/directives';
 import customVuetify from './plugins/vuetify'; // Импортируем настроенный Vuetify
-import ExampleComponent from './components/ExampleComponent.vue';
+import Profile from './components/Profile.vue';
 
 const vuetifyInstance = createVuetify({
     components,
@@ -15,5 +15,5 @@ const vuetifyInstance = createVuetify({
 
 const app = createApp({});
 app.use(customVuetify);
-app.component('example-component', ExampleComponent);
+app.component('profile', Profile);
 app.mount('#app');
