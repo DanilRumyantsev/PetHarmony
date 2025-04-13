@@ -13,13 +13,26 @@
         <div class="container">
             <img src="/assets/images_pets/photo1.png" class="image">
             <div class="column">
-                <p>Имя пользователя: <span class="user-name">Зоя Никифорова</span></p>
-                <p>Логин: <span class="user-login">zoya_nikiforova</span></p>
-                <p><--- Выйти <--- Редактировать</p>
+                <p>Имя пользователя: <span class="bold">Зоя Никифорова</span></p>
+                <p>Логин: <span class="bold">zoya_nikiforova</span></p>
+                <p>  
+                    <v-btn class="button"
+                        v-bind="activatorProps"
+                        text="Выйти"
+                        variant="flat"
+                    ></v-btn>
+                    <span>
+                    <v-btn class="button"
+                        v-bind="activatorProps"
+                        text="Редактировать"
+                        variant="flat"
+                    ></v-btn>
+                    </span>
+                </p>
             </div>
             <div class="column">
-                <p>Телефон: <span class="user-phone">88008008888</span></p>
-                <p>Почта: <span class="user-email">nikiforova@example.com</span></p>
+                <p>Телефон: <span class="bold">88008008888</span></p>
+                <p>Почта: <span class="bold">nikiforova@example.com</span></p>
                 <p class="select">
                 <v-select
                     :items="items_clinics"
@@ -37,13 +50,17 @@
         <div class="container">
             <img src="/assets/images_pets/pet1.png" class="image">
             <div class="column">
-                <p>Имя: <span class="user-name">Пал Палыч</span></p>
-                <p>Индентификатор: <span class="user-login">c200718</span></p>
-                <p><--- Редактировать</p>
+                <p>Имя: <span class="bold">Пал Палыч</span></p>
+                <p>Индентификатор: <span class="bold">c200718</span></p>
+                <p><v-btn class="button"
+                    v-bind="activatorProps"
+                    text="Редактировать"
+                    variant="flat"
+                ></v-btn></p>
             </div>
             <div class="column">
-                <p>Окрас: <span class="user-phone">Черный</span></p>
-                <p>Дата рождения: <span class="user-email">01.06.2020</span></p>
+                <p>Окрас: <span class="bold">Черный</span></p>
+                <p>Дата рождения: <span class="bold">01.06.2020</span></p>
                 <p class="select">
                 <v-select
                     :items="items_pets"
@@ -54,6 +71,8 @@
             </div>
         </div>
     </div>
+
+
 </template>
 
 <style>
@@ -109,7 +128,7 @@ body{
   flex: 1; 
   margin: 0px 50px; 
 }
-.user-name, .user-login, .user-phone, .user-email {
+.bold {
   font-weight: bold;
 }
 .divider {
@@ -121,6 +140,19 @@ body{
 .select{
     height:fit-content;
     margin: 0px; 
+}
+.button{
+    background-color: #EAFFEA;
+    color: #037247;
+    width: fit;
+    height: 35px;
+    border-radius: 20px;
+    font-size: 10px;
+    /* margin-bottom: 15px; */
+}
+.button_div{
+    display: flex;
+    justify-content: center;
 }
 </style>
 
