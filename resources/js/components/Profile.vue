@@ -76,8 +76,8 @@
 </template>
 
 <style>
-body{
-    background-color:#FFFFFF;
+
+.body{
     display: flex;
     justify-content: center;
 }

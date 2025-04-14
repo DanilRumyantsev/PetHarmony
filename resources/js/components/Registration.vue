@@ -38,7 +38,7 @@
 
             <div>
             <!-- <v-checkbox label="Checkbox"></v-checkbox> -->
-            <v-checkbox
+            <!-- <v-checkbox
                 v-model="checkbox"
                 label="Согласие с политикой конфидециальности"
                 required
@@ -47,7 +47,7 @@
                 v-model="checkbox"
                 label="Согласие с политикой персональных данных"
                 required
-            ></v-checkbox>
+            ></v-checkbox> -->
             </div>
         </div>
         

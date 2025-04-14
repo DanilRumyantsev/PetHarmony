@@ -8,7 +8,8 @@
 </head>
 <body>
     <div id="app">
-        <profile></profile>
+        <!-- <profile></profile> -->
+        <first-window></first-window>
     </div>
 </body>
 </html>
