@@ -8,7 +8,7 @@ import * as directives from 'vuetify/directives';
 import customVuetify from './plugins/vuetify'; // Импортируем настроенный Vuetify
 import router from './router/router.js';
 import FirstWindow from './components/FirstWindow.vue';
-import Profile from './components/Profile.vue';
+// import Profile from './components/Profile.vue';
 
 const vuetifyInstance = createVuetify({
     components,

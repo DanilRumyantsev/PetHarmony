@@ -3,26 +3,28 @@
         <ul class="no-markers">
             <li class="li"><img src="/assets/logos/LOGO_short.svg" class="logo"></li>
             <li class="li">Профиль</li>
-            <li class="li">Категории здоровья</li>
-            <li class="li">Отчеты</li>
-            <li class="li">Настройки</li>
+            <li class="li"><router-link to="/categories"> Категории здоровья</router-link> </li>
+            <li class="li"><router-link to="/reports"> Отчеты</router-link></li>
+            <li class="li"><router-link to="/settings"> Настройки</router-link></li>
         </ul>
     </header>
 
     <div class="person">
-        <div class="container">
+        <router-link to="/"> Выход</router-link>
+        <h1 class="h1">Профиль</h1>
+        <div class="container_profile">
             <img src="/assets/images_pets/photo1.png" class="image">
             <div class="column">
                 <p>Имя пользователя: <span class="bold">Зоя Никифорова</span></p>
                 <p>Логин: <span class="bold">zoya_nikiforova</span></p>
                 <p>  
-                    <v-btn class="button"
+                    <v-btn class="button_mini"
                         v-bind="activatorProps"
                         text="Выйти"
                         variant="flat"
                     ></v-btn>
                     <span>
-                    <v-btn class="button"
+                    <v-btn class="button_mini"
                         v-bind="activatorProps"
                         text="Редактировать"
                         variant="flat"
@@ -47,12 +49,12 @@
     <div class="divider"></div>
 
     <div class="pet">
-        <div class="container">
+        <div class="container_profile">
             <img src="/assets/images_pets/pet1.png" class="image">
             <div class="column">
                 <p>Имя: <span class="bold">Пал Палыч</span></p>
                 <p>Индентификатор: <span class="bold">c200718</span></p>
-                <p><v-btn class="button"
+                <p><v-btn class="button_mini"
                     v-bind="activatorProps"
                     text="Редактировать"
                     variant="flat"
@@ -77,7 +79,7 @@
 
 <style>
 
-.body{
+.body_profile{
     display: flex;
     justify-content: center;
 }
@@ -104,7 +106,12 @@
   width: 242px; 
   height: 35px;    
 }
-.image {
+.h1{
+    color:#037247;
+    margin-bottom: 25px;
+    font-size: 28px;
+}
+.image_profile {
   width:auto;
   height: auto; 
 }
@@ -116,13 +123,13 @@
     text-align: center;
     padding-top: 45px;
 }
-.container{
+.container_profile{
     display: flex;
     flex-direction: row;
-    /* justify-content: center; */
     align-items: center;
     text-align: left;
-    justify-content: space-between; /* Распределяет колонки по ширине */
+    justify-content: space-between;
+    width: 1000px;
 }
 .column {
   flex: 1; 
@@ -141,7 +148,7 @@
     height:fit-content;
     margin: 0px; 
 }
-.button{
+.button_mini{
     background-color: #EAFFEA;
     color: #037247;
     width: fit;

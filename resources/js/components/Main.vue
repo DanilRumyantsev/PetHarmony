@@ -5,10 +5,10 @@
 
 <template>
 
-<div class="body">
-    <div class="container">
-        <img src="/assets/logos/LOGO.svg" class="image">
-        <p class="text">Добро пожаловать!</p>
+<div class="body_main">
+    <div class="container_main">
+        <img src="/assets/logos/LOGO.svg" class="image_main">
+        <p class="text_main">Добро пожаловать!</p>
         <Registration />
         <Enterance />
         <router-link to="/profile"> На сайт</router-link>   
@@ -20,9 +20,9 @@
 
 <style>
 
-.body{
+.body_main{
     background: #ffffff;
-    padding-top: 50%;
+    padding-top: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,25 +32,17 @@
     margin-bottom: 25px;
     font-size: 28px;
 }
-.container{
+.container_main{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
 }
-.image {
+.image_main {
   max-width: 350px; 
   height: auto;    
   margin-bottom: 15px; 
 }
-.button{
-    background-color: #C7FFBA;
-    color: #037247;
-    width: 200px;
-    height: 50px;
-    border-radius: 20px;
-    font-size: 14px;
-    margin-bottom: 15px;
-}
+
 </style>
