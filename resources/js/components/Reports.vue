@@ -2,13 +2,13 @@
     <header class="header">
         <ul class="no-markers">
             <li class="li"><img src="/assets/logos/LOGO_short.svg" class="logo"></li>
-            <li class="li"><router-link to="/profile"> Профиль</router-link></li>
-            <li class="li"><router-link to="/categories"> Категории здоровья</router-link> </li>
+            <li class="li"><router-link to="/profile" class="route"> Профиль</router-link></li>
+            <li class="li"><router-link to="/categories" class="route"> Категории здоровья</router-link> </li>
             <li class="li"> Отчеты </li>
-            <li class="li"><router-link to="/settings"> Настройки</router-link></li>
+            <li class="li"><router-link to="/settings" class="route"> Настройки</router-link></li>
         </ul>
     </header>
-    <div>
+    <div class="head">
         <h1 class="h1">Отчеты</h1>
     </div>
 </template>
@@ -20,9 +20,5 @@
 </script>
 
 <style>
-.h1{
-    color:#037247;
-    margin-bottom: 25px;
-    font-size: 28px;
-}
+
 </style>

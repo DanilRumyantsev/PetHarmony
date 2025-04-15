@@ -3,26 +3,29 @@
         <ul class="no-markers">
             <li class="li"><img src="/assets/logos/LOGO_short.svg" class="logo"></li>
             <li class="li">Профиль</li>
-            <li class="li"><router-link to="/categories"> Категории здоровья</router-link> </li>
-            <li class="li"><router-link to="/reports"> Отчеты</router-link></li>
-            <li class="li"><router-link to="/settings"> Настройки</router-link></li>
+            <li class="li"><router-link to="/categories" class="route"> Категории здоровья</router-link> </li>
+            <li class="li"><router-link to="/reports" class="route"> Отчеты</router-link></li>
+            <li class="li"><router-link to="/settings" class="route"> Настройки</router-link></li>
         </ul>
     </header>
 
-    <div class="person">
-        <router-link to="/"> Выход</router-link>
+    <div class="head">
         <h1 class="h1">Профиль</h1>
+    </div>
+    <div class="person">  
         <div class="container_profile">
             <img src="/assets/images_pets/photo1.png" class="image">
             <div class="column">
                 <p>Имя пользователя: <span class="bold">Зоя Никифорова</span></p>
                 <p>Логин: <span class="bold">zoya_nikiforova</span></p>
-                <p>  
-                    <v-btn class="button_mini"
-                        v-bind="activatorProps"
-                        text="Выйти"
-                        variant="flat"
-                    ></v-btn>
+                <p>
+                    <router-link to="/" class="route">
+                        <v-btn class="button_mini" 
+                        v-bind="activatorProps" 
+                        variant="flat">
+                            Выйти
+                        </v-btn>
+                    </router-link>
                     <span>
                     <v-btn class="button_mini"
                         v-bind="activatorProps"
@@ -78,7 +81,9 @@
 </template>
 
 <style>
-
+.route{
+    color: #037247;
+}
 .body_profile{
     display: flex;
     justify-content: center;
@@ -105,6 +110,13 @@
 .logo {
   width: 242px; 
   height: 35px;    
+}
+.head{
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  margin-top: 25px;
+  width: 1000px;
 }
 .h1{
     color:#037247;
