@@ -11,7 +11,7 @@
         <p class="text_main">Добро пожаловать!</p>
         <Registration />
         <Enterance />
-        <router-link to="/profile" class="route"> На сайт</router-link>   
+        <router-link to="/profile"> На сайт</router-link>   
     </div>
 </div>
     

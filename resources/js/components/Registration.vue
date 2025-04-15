@@ -1,5 +1,5 @@
 <template>
-    <v-dialog max-width="400">
+  <v-dialog max-width="400">
   <template v-slot:activator="{ props: activatorProps }">
     <v-btn class="button"
       v-bind="activatorProps"
@@ -17,25 +17,19 @@
                     v-model="login"
                     label="Login"
                 ></v-text-field>
-                </v-form>
-            </v-sheet>
-            <v-sheet class="mx-auto" width="350">
-                <v-form @submit.prevent>
+                
                 <v-text-field
                     v-model="email"
                     label="Email"
                 ></v-text-field>
-                </v-form>
-            </v-sheet>
-            <v-sheet class="mx-auto" width="350">
-                <v-form @submit.prevent>
+
                 <v-text-field
                     v-model="password"
                     label="Password"
                 ></v-text-field>
                 </v-form>
             </v-sheet>
-
+            
             <div>
             <!-- <v-checkbox label="Checkbox"></v-checkbox> -->
             <!-- <v-checkbox
@@ -66,11 +60,10 @@
           @click="isActive.value = false"
         ></v-btn>
         
-      </v-card-actions>
-    </v-card>
-  </template>
-</v-dialog>
-
+        </v-card-actions>
+      </v-card>
+    </template>
+  </v-dialog>
 </template>
 
 <style>

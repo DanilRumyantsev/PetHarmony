@@ -18,7 +18,6 @@
     padding: 0;
 }
 body{
-    background-color:#FFFFFF;
     display: flex;
     justify-content: center;
 }

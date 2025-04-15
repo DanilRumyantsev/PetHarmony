@@ -12,8 +12,8 @@
         <h1 class="h1">Настройки</h1>
     </div>
     <div>
-        <p>Тема</p>
-        <p>
+        Тема
+        <v-switch label="Темная" inset></v-switch>
             <v-btn class="button" 
             v-bind="activatorProps" 
             variant="flat">
@@ -26,7 +26,6 @@
                             Темная
                         </v-btn>
             </router-link>
-        </p>
     </div>
 </template>
 

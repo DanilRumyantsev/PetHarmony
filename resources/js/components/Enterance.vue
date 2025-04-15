@@ -17,18 +17,13 @@
                     v-model="login"
                     label="Login"
                 ></v-text-field>
-                <!-- <v-btn class="mt-2" type="submit" block>Submit</v-btn> -->
-                </v-form>
-            </v-sheet>
-        
-            <v-sheet class="mx-auto" width="350">
-                <v-form @submit.prevent>
                 <v-text-field
                     v-model="password"
                     label="Password"
                 ></v-text-field>
                 </v-form>
             </v-sheet>
+    
         </div>
         
             

@@ -1,4 +1,4 @@
-<template>
+<template class="">
     <header class="header">
         <ul class="no-markers">
             <li class="li"><img src="/assets/logos/LOGO_short.svg" class="logo"></li>
@@ -35,6 +35,7 @@
 </script>
 
 <style>
+
 .button_dark{
     background-color: #037247;
     color: #C7FFBA;

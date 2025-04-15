@@ -133,7 +133,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding-top: 45px;
+    padding-top: 25px;
 }
 .container_profile{
     display: flex;
