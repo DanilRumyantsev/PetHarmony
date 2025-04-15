@@ -54,18 +54,10 @@
 </template>
 
 <style>
-.button{
-    background-color: #C7FFBA;
-    color: #037247;
-    width: 200px;
-    height: 50px;
-    border-radius: 20px;
-    font-size: 14px;
-    margin-bottom: 15px;
 .checkbox{
     margin-left: 50px;
 }
-}</style>
+</style>
 
 <script setup>
 // dialog window

@@ -13,20 +13,18 @@
     </div>
     <div>
         <p>Тема</p>
-        <p>
-            <v-btn class="button" 
-            v-bind="activatorProps" 
-            variant="flat">
-                Светлая
-            </v-btn>
-            <router-link to="/settings_dark" class="route">
+        <router-link to="/settings" class="route">
                         <v-btn class="button_dark" 
                         v-bind="activatorProps" 
                         variant="flat">
-                            Темная
+                            Светлая
                         </v-btn>
-            </router-link>
-        </p>
+        </router-link>
+        <v-btn class="button" 
+        v-bind="activatorProps" 
+        variant="flat">
+            Темная
+        </v-btn>
     </div>
 </template>
 
@@ -37,5 +35,13 @@
 </script>
 
 <style>
-
+.button_dark{
+    background-color: #037247;
+    color: #C7FFBA;
+    width: 200px;
+    height: 50px;
+    border-radius: 20px;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
 </style>

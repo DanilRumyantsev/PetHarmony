@@ -7,6 +7,7 @@ import EditProfile from "../components/EditProfile.vue";
 import EditPet from "../components/EditPet.vue";
 import Reports from "../components/Reports.vue";
 import Settings from "../components/Settings.vue";
+import Settings_dark from "../components/dark_theme/Settings_dark.vue";
 
 const routes = [
     { path: '/', component: Main},
@@ -16,6 +17,7 @@ const routes = [
     { path: '/categories', component: Categories },
     { path: '/reports', component: Reports },
     { path: '/settings', component: Settings },
+    { path: '/settings_dark', component: Settings_dark },
 ]
 
 const router = createRouter({
