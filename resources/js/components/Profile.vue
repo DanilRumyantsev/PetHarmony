@@ -61,7 +61,15 @@
                     v-bind="activatorProps"
                     text="Редактировать"
                     variant="flat"
-                ></v-btn></p>
+                ></v-btn>
+                <span>
+                <!-- <v-btn class="button_mini"
+                    v-bind="activatorProps"
+                    text="Записи о здоровье"
+                    variant="flat"
+                ></v-btn> -->
+                <HealthRecord />
+                </span></p>
             </div>
             <div class="column">
                 <p>Окрас: <span class="bold">Черный</span></p>
@@ -167,7 +175,7 @@
     height: 35px;
     border-radius: 20px;
     font-size: 10px;
-    /* margin-bottom: 15px; */
+    margin-left: 5px;
 }
 .button{
     background-color: #C7FFBA;
@@ -185,6 +193,8 @@
 </style>
 
 <script setup>
+import HealthRecord from './HealthRecord.vue';
+
     const items_clinics = ['ул. Пушкинская, д.72', '1-ая Барикадная, д.29', 'пер. Соборный, 94б', 'ул.Казахская, д.49']
     const items_pets = ['Коты, до 5 лет', 'Котята, до 2 лет']
 </script>
