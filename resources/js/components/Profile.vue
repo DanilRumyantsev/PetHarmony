@@ -13,25 +13,19 @@
     <div class="head">
         <h1 class="h1">Профиль</h1>
     </div>
+    
     <div class="person">  
         <div class="container_profile">
             <img src="/assets/images_pets/photo1.png" class="image">
             <div class="column">
-                <p>Имя пользователя: <span class="bold">Зоя Никифорова</span></p>
-                <p>Логин: <span class="bold">zoya_nikiforova</span></p>
+                <p>Имя пользователя: <span class="bold">{{ user.name }}</span></p>
+                <p>Почта: <span class="bold">{{ user.email }}</span></p>
                 <v-btn
                 @click.prevent="logout_button" 
                 class="button_mini"
                 text="Выйти"
                 variant="flat"
                 ></v-btn>
-                <router-link to="/" class="route">
-                    <v-btn class="button_mini" 
-                    v-bind="activatorProps" 
-                    variant="flat">
-                        Выйти
-                    </v-btn>
-                </router-link>
                 <v-btn
                 class="button_mini"
                 text="Редактировать"
@@ -39,7 +33,7 @@
                 ></v-btn>
             </div>
             <div class="column">
-                <p>Телефон: <span class="bold">88008008888</span></p>
+                <p>Телефон: <span class="bold">{{ user.phone || 'Не указан' }}</span></p>
                 <p>Почта: <span class="bold">nikiforova@example.com</span></p>
                 <p class="select">
                 <v-select
@@ -53,38 +47,40 @@
     </div>
     <div class="divider"></div>
 
-    <div class="pet">
-        <div class="container_profile ">
-            <img src="/assets/images_pets/pet1.png" class="image">
-            <div class="column">
-                <p>Имя: <span class="bold">Пал Палыч</span></p>
-                <p>Индентификатор: <span class="bold">c200718</span></p>
-                <p><v-btn class="button_mini"
-                    text="Редактировать"
-                    variant="flat"
-                ></v-btn>
-                <span>
-                <HealthRecord />
-                </span></p>
-            </div>
-            <div class="column">
-                <p>Окрас: <span class="bold">Черный</span></p>
-                <p>Дата рождения: <span class="bold">01.06.2020</span></p>
-                <p class="select">
-                <v-select
-                    :items="items_pets"
-                    density="compact"
-                    label="Категория здоровья"
-                ></v-select>
-                </p>
-            </div>
+    <div v-for="pet in pets" :key="pet.id_pet" class="pet">
+      <div class="container_pet">
+        <img src="/assets/images_pets/pet1.png" class="image" />
+        <div class="column">
+          <p>Имя: <span class="bold">{{ pet.name_pet }}</span></p>
+          <p>Идентификатор: <span class="bold">{{ pet.id_pet }}</span></p>
+          <p>
+            <v-btn class="button_mini" text="Редактировать" variant="flat"></v-btn>
+            <span>
+              <HealthRecord />
+            </span>
+          </p>
         </div>
+        <div class="column">
+          <p>Окрас: <span class="bold">{{ pet.color }}</span></p>
+          <p>Дата рождения: <span class="bold">{{ pet.birth_date }}</span></p>
+          <p>Категория: <span class="bold">{{ getCategoryName(pet.category_id) }}</span></p>
+        </div>
+      </div>
     </div>
+    <div class="pet__add">
+        <CreatePet />
+    </div>
+    <v-file-upload clearable density="compact" variant="compact"></v-file-upload>
+
 
 
 </template>
 
 <style>
+body {
+    width: 1000px;
+    margin: 0 auto;
+}
 .route{
     color: #037247;
 }
@@ -118,10 +114,10 @@
 }
 .head{
   display: flex;
+  width: 1000px;
   justify-content: center; 
   align-items: center;
-  margin-top: 25px;
-  width: 1000px;
+  margin: 25px auto 0 auto;
 }
 .h1{
     color:#037247;
@@ -145,11 +141,26 @@
 }
 .container_profile{
     display: flex;
+    width: 1000px;
     flex-direction: row;
     align-items: center;
     text-align: left;
     justify-content: space-between;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px #E8E8E8;
+}
+.container_pet {
+    display: flex;
     width: 1000px;
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    justify-content: space-between;
+    margin: 10px 0;
+    padding: 10px;
+    box-shadow: 0 3px 10px #E8E8E8;
+    border-radius: 10px;
 }
 .column {
   flex: 1;
@@ -159,10 +170,10 @@
   font-weight: bold;
 }
 .divider {
-  width: 100%;
+  width: 1000px;
   height: 1px;
   background-color: #ccc;
-  margin: 20px 0;
+  margin: 20px auto 5px auto;
 }
 .select{
     height:fit-content;
@@ -175,7 +186,7 @@
     height: 35px;
     border-radius: 20px;
     font-size: 10px;
-    margin-left: 5px;
+    margin-right: 5px;
 }
 .button{
     background-color: #C7FFBA;
@@ -190,26 +201,52 @@
     display: flex;
     justify-content: center;
 }
+.pet__add {
+    text-align: center;
+    margin: 5px auto;
+}
 </style>
 
 <script setup>
-    import axios from 'axios'
-    import router from '../router/router'
-    import Cookies from 'js-cookie'
-    import HealthRecord from './HealthRecord.vue';
+import axios from 'axios';
+import { ref, onMounted } from 'vue';
+import router from '../router/router';
+import Cookies from 'js-cookie';
+import HealthRecord from './HealthRecord.vue';
+import CreatePet from './CreatePet.vue';
 
-    const items_clinics = ['ул. Пушкинская, д.72', '1-ая Барикадная, д.29', 'пер. Соборный, 94б', 'ул.Казахская, д.49']
-    const items_pets = ['Коты, до 5 лет', 'Котята, до 2 лет']
+const items_clinics = ['ул. Пушкинская, д.72', '1-ая Барикадная, д.29', 'пер. Соборный, 94б', 'ул.Казахская, д.49'];
+const user = ref({});
+const pets = ref([]);
+const categories = ref([]);
+const getCategoryName = (id) => {
+  const category = categories.value.find(cat => cat.id === id)
+  return category ? category.name_category : 'Неизвестно'
+}
 
-    const logout_button = () => {
-        axios.post('/logout').then(response => {
-            console.log('Logout succeful')
+const logout_button = () => {
+  axios.post('/logout').then(response => {
+    console.log('Logout successful');
+    localStorage.removeItem('x_xsrf_token');
+    router.push('/');
+  }).catch(error => {
+    console.error('Ошибка при logout:', error.response);
+  });
+};
 
-            localStorage.removeItem('x_xsrf_token')
-
-            router.push('/')
-        }).catch(error => {
-            console.error('Ошибка при logout:', error.response)
-        })
-    }
+onMounted(() => {
+  axios.get('/api/user').then(response => {
+    user.value = response.data;
+  }).catch(error => {
+    console.error('Ошибка при загрузке данных пользователя:', error);
+  });
+  axios.get('/api/pets').then(response => {
+    pets.value = response.data
+  }).catch(error => {
+    console.error('Ошибка при загрузке животных:', error)
+  })
+  axios.get('/api/categories').then(response => {
+    categories.value = response.data
+  })
+});
 </script>

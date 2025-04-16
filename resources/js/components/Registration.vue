@@ -7,7 +7,7 @@
         variant="flat"
       ></v-btn>
     </template>
-    
+
     <template v-slot:default="{ isActive }">
       <v-card title="Регистрация">
         <div class="container">
@@ -40,14 +40,15 @@
             </v-sheet>
           </v-form>
           <div class="politics_privacy">
-            <v-switch label="Согласие с политикой конфидециальности"></v-switch>
-            <v-switch label="Согласие с политикой персональных данных"></v-switch>
+            <v-checkbox v-model="agreeToPrivacy" label="Согласие с политикой конфидециальности"></v-checkbox>
+            <v-checkbox v-model="agreeToTerms" label="Согласие с политикой персональных данных"></v-checkbox>
           </div>
         </div>
 
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
+            :disabled="!canConfirm"
             text="Подтвердить"
             @click.prevent="register"
             @click="isActive.value = true"
@@ -60,10 +61,9 @@
       </v-card>
     </template>
   </v-dialog>
-
 </template>
 
-<style>
+<style scoped>
 .v-card {
   padding: 10px;
 }
@@ -94,14 +94,21 @@
 <script setup>
   import axios from 'axios'
   import Cookies from 'js-cookie'
-  import { ref } from 'vue'
+  import { ref, computed } from 'vue'
   import router from '../router/router'
+
   const dialog = ref(false)
   const name = ref(null)
   const email = ref(null)
   const password = ref(null)
   const password_confirmation = ref(null)
-  
+  const agreeToPrivacy = ref(false)
+  const agreeToTerms = ref(false)
+
+  const canConfirm = computed(() => {
+    return agreeToPrivacy.value && agreeToTerms.value
+  })
+
   const register = () => {
     axios.get('/sanctum/csrf-cookie').then(response => {
       const xsrfToken = Cookies.get('XSRF-TOKEN')
@@ -114,11 +121,10 @@
         password_confirmation: password_confirmation.value
       }).then(res => {
         router.push('/profile')
-        console.log('Registration succesful')
+        console.log('Registration successful')
       }).catch(err => {
         console.log('Ошибка при регистрации:', err.response)
       })
     })
-    
   }
 </script>

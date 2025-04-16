@@ -55,7 +55,7 @@
 
 </template>
 
-<style>
+<style scoped>
 .button {
     background-color: #C7FFBA;
     color: #037247;
@@ -64,6 +64,10 @@
     border-radius: 20px;
     font-size: 14px;
     margin-bottom: 15px;
+}
+.v-btn {
+  background-color: #C7FFBA;
+  color: #037247;
 }
 .checkbox{
     margin-left: 50px;

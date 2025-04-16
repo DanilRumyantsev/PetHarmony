@@ -1,158 +1,80 @@
 <script setup>
-    const items_clinics = ['ул. Пушкинская, д.72', '1-ая Барикадная, д.29', 'пер. Соборный, 94б', 'ул.Казахская, д.49']
-    const items_pets = ['Коты, до 5 лет', 'Котята, до 2 лет']
-// const variants = ['elevated', 'flat', 'tonal', 'outlined', 'text', 'plain']
-    const variants = ['tonal']
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+import CreateCategory from './CreateCategory.vue';
+
+onMounted(() => {
+  axios.get('/api/categories').then(response => {
+    categories.value = response.data;
+  }).catch(error => {
+    console.error('Ошибка при загрузке категорий:', error);
+  });
+});
+
+const deleteCategory = (id) => {
+  axios.delete(`/api/categories/${id}`).then(() => {
+    categories.value = categories.value.filter(category => category.id !== id);
+  }).catch(error => {
+    console.error('Ошибка при удалении категории:', error);
+  });
+};
+
+const categories = ref([]);
+
+const addCategoryToList = (newCategory) => {
+  categories.value.push(newCategory);
+};
 </script>
 
 <template>
     <header class="header">
-        <ul class="no-markers">
-            <li class="li"><img src="/assets/logos/LOGO_short.svg" class="logo"></li>
-            <li class="li"><router-link to="/profile" class="route"> Профиль</router-link></li>
-            <li class="li"> Категории здоровья </li>
-            <li class="li"><router-link to="/reports" class="route"> Отчеты</router-link></li>
-            <li class="li"><router-link to="/settings" class="route"> Настройки</router-link></li>
-        </ul>
+      <ul class="no-markers">
+        <li class="li"><img src="/assets/logos/LOGO_short.svg" class="logo"></li>
+        <li class="li"><router-link to="/profile" class="route"> Профиль</router-link></li>
+        <li class="li"> Категории здоровья </li>
+        <li class="li"><router-link to="/reports" class="route"> Отчеты</router-link></li>
+        <li class="li"><router-link to="/settings" class="route"> Настройки</router-link></li>
+      </ul>
     </header>
     
     <div class="head">
-        <h1 class="h1">Категории здоровья</h1>
+      <h1 class="h1">Категории здоровья</h1>
     </div>
-
-    <div class="form">
-        <v-form v-model="valid">
-          <v-container>
-            <v-row>
-              <v-col
-                cols="12"
-                md="4"
-              >
-                <v-text-field
-                  v-model="firstname"
-                  rounded="xl"
-                  :counter="15"
-                  :rules="nameRules"
-                  label="Вид животного"
-                  required
-                ></v-text-field>
-              </v-col>
-
-              <v-col
-                cols="12"
-                md="4"
-              >
-                <v-text-field
-                  v-model="lastname"
-                  rounded="xl"
-                  :counter="15"
-                  :rules="nameRules"
-                  label="Описание (от/до возраста)"
-                  required
-                  ></v-text-field>
-              </v-col>
-              <v-btn class="button_create"
-              v-bind="activatorProps"
-              text="Создать"
-              variant="flat"
-              ></v-btn>
-          </v-row>
-        </v-container>
-      </v-form>
-  </div>
   
   <div class="categories">
     <v-row dense>
-    <v-col
-      v-for="(variant, i) in variants"
-      :key="i"
-      cols="12"
-      md="4"
-    >
-      <v-card
-        :variant="variant"
-        class="mx-auto"
-        color="surface-variant"
-        max-width="300"
-        subtitle="Возраст: до 5 лет"
-        title="Коты"
-        rounded="xl"
+      <v-col
+        v-for="category in categories"
+        :key="category.id"
+        cols="12"
+        md="4"
       >
-        <template v-slot:actions>
-          <v-btn text="Редактировать"></v-btn>
-          <v-btn text="Удалить"></v-btn>
-        </template>
-      </v-card>
-    </v-col>
-    <v-col
-      v-for="(variant, i) in variants"
-      :key="i"
-      cols="12"
-      md="4"
-    >
-      <v-card
-        :variant="variant"
-        class="mx-auto"
-        color="surface-variant"
-        max-width="300"
-        subtitle="Возраст: до 2 лет"
-        title="Котята"
-        rounded="xl"
-      >
-        <template v-slot:actions>
-          <v-btn text="Редактировать"></v-btn>
-          <v-btn text="Удалить"></v-btn>
-        </template>
-      </v-card>
-    </v-col>
-    <v-col
-      v-for="(variant, i) in variants"
-      :key="i"
-      cols="12"
-      md="4"
-    >
-      <v-card
-        :variant="variant"
-        class="mx-auto"
-        color="surface-variant"
-        max-width="300"
-        subtitle="Возраст: до 2 лет"
-        title="Щенки"
-        rounded="xl"
-      >
-        <template v-slot:actions>
-          <v-btn text="Редактировать"></v-btn>
-          <v-btn text="Удалить"></v-btn>
-        </template>
-      </v-card>
-    </v-col>
-    <v-col
-      v-for="(variant, i) in variants"
-      :key="i"
-      cols="12"
-      md="4"
-    >
-      <v-card
-        :variant="variant"
-        class="mx-auto"
-        color="surface-variant"
-        max-width="300"
-        subtitle="Возраст: до 7 лет"
-        title="Собаки"
-        rounded="xl"
-      >
-        <template v-slot:actions>
-          <v-btn text="Редактировать"></v-btn>
-          <v-btn text="Удалить"></v-btn>
-        </template>
-      </v-card>
-    </v-col>
+        <v-card
+          class="mx-auto"
+          width="300"
+          :subtitle="`Возраст: ${category.description}`"
+          :title="category.name_category"
+          rounded="xl"
+        >
+          <template v-slot:actions>
+            <v-btn @click="editCategory(category)" text="Редактировать"></v-btn>
+            <v-btn @click="deleteCategory(category.id)" text="Удалить"></v-btn>
+          </template>
+        </v-card>
+      </v-col>
     </v-row>
+  </div>
+
+  <div class="createCategory">
+    <CreateCategory @category-created = "addCategoryToList" />
   </div>
   
 </template>
 
 <style scoped>
+.v-card {
+  margin: 5px;
+}
 .button_create{
     background-color: #C7FFBA;
     color: #037247;
@@ -162,33 +84,17 @@
     font-size: 14px;
     margin: 25px 65px;
 }
-.form{
-  width: 1000px; 
+.head {
+  margin: 50px auto 0 auto;
 }
 .categories{
   width: 1000px;
+  margin: 50px auto 20px auto;
+}
+.v-card {
+  background-color: #E8E8E8;
+}
+.createCategory {
+  margin: 0 auto;
 }
 </style>
-
-<script>
-// export default {
-//     data: () => ({
-//       valid: false,
-//       firstname: '',
-//       lastname: '',
-//       nameRules: [
-//         value => {
-//           if (value) return true
-
-//           return 'Поле обязательно.'
-//         },
-//         value => {
-//           if (value?.length <= 15) return true
-
-//           return 'Текст должен быть менее 15 символов'
-//         },
-//       ],
-      
-//     }),
-//   }
-</script>

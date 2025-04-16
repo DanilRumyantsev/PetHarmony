@@ -9,7 +9,7 @@
   </template>
   <v-card
     class="mx-auto"
-    style="max-width: 500px;"
+    style="width: 500px;"
   >
     <v-toolbar
       color="green"
