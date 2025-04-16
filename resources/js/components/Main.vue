@@ -6,28 +6,35 @@
 <template>
 
 <div class="body_main">
-    <div class="container_main">
+    <router-link to="/get">Get</router-link>
+    <v-card class="container_main">
         <img src="/assets/logos/LOGO.svg" class="image_main">
         <p class="text_main">Добро пожаловать!</p>
         <Registration />
         <Enterance />
-        <router-link to="/profile"> На сайт</router-link>   
-    </div>
+        <!-- <router-link to="/profile"> На сайт</router-link> -->
+    </v-card>
 </div>
-    
+
 
 </template>
 
-<style>
+<style scoped>
+
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 .body_main{
     background: #ffffff;
-    padding-top: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: auto;
 }
-.text{
+.text_main{
     color: #037247;
     margin-bottom: 25px;
     font-size: 28px;
@@ -38,11 +45,12 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    padding: 100px;
 }
 .image_main {
-  max-width: 350px; 
-  height: auto;    
-  margin-bottom: 15px; 
+  max-width: 350px;
+  height: auto;
+  margin-bottom: 15px;
 }
 
 </style>

@@ -10,24 +10,25 @@
     </header>
 
     <div class="person">
-        <router-link to="/"> Выход</router-link>
+        <!-- <router-link to="/"> Выход</router-link> -->
         <h1 class="h1">Профиль</h1>
         <div class="container_profile">
             <img src="/assets/images_pets/photo1.png" class="image">
             <div class="column">
                 <p>Имя пользователя: <span class="bold">Зоя Никифорова</span></p>
                 <p>Логин: <span class="bold">zoya_nikiforova</span></p>
-                <p>  
-                    <v-btn class="button_mini"
-                        v-bind="activatorProps"
-                        text="Выйти"
-                        variant="flat"
+                <p>
+                    <v-btn
+                    @click.prevent="logout_button" 
+                    class="button_mini"
+                    text="Выйти"
+                    variant="flat"
                     ></v-btn>
                     <span>
-                    <v-btn class="button_mini"
-                        v-bind="activatorProps"
-                        text="Редактировать"
-                        variant="flat"
+                    <v-btn
+                    class="button_mini"
+                    text="Редактировать"
+                    variant="flat"
                     ></v-btn>
                     </span>
                 </p>
@@ -45,17 +46,16 @@
             </div>
         </div>
     </div>
-    
+
     <div class="divider"></div>
 
     <div class="pet">
-        <div class="container_profile">
+        <div class="container_profile ">
             <img src="/assets/images_pets/pet1.png" class="image">
             <div class="column">
                 <p>Имя: <span class="bold">Пал Палыч</span></p>
                 <p>Индентификатор: <span class="bold">c200718</span></p>
                 <p><v-btn class="button_mini"
-                    v-bind="activatorProps"
                     text="Редактировать"
                     variant="flat"
                 ></v-btn></p>
@@ -84,6 +84,7 @@
     justify-content: center;
 }
 .header{
+    margin: 0 auto;
     background-color: #C7FFBA;
     width: 1000px;
     height: 55px;
@@ -103,8 +104,8 @@
     padding-left: 35px;
 }
 .logo {
-  width: 242px; 
-  height: 35px;    
+  width: 242px;
+  height: 35px;
 }
 .h1{
     color:#037247;
@@ -113,7 +114,7 @@
 }
 .image_profile {
   width:auto;
-  height: auto; 
+  height: auto;
 }
 .person{
     display: flex;
@@ -122,6 +123,9 @@
     align-items: center;
     text-align: center;
     padding-top: 45px;
+}
+.pet {
+    margin: 0 auto;
 }
 .container_profile{
     display: flex;
@@ -132,8 +136,8 @@
     width: 1000px;
 }
 .column {
-  flex: 1; 
-  margin: 0px 50px; 
+  flex: 1;
+  margin: 0px 50px;
 }
 .bold {
   font-weight: bold;
@@ -146,7 +150,7 @@
 }
 .select{
     height:fit-content;
-    margin: 0px; 
+    margin: 0px;
 }
 .button_mini{
     background-color: #EAFFEA;
@@ -164,6 +168,22 @@
 </style>
 
 <script setup>
+    import axios from 'axios'
+    import router from '../router/router'
+    import Cookies from 'js-cookie'
+
     const items_clinics = ['ул. Пушкинская, д.72', '1-ая Барикадная, д.29', 'пер. Соборный, 94б', 'ул.Казахская, д.49']
     const items_pets = ['Коты, до 5 лет', 'Котята, до 2 лет']
+
+    const logout_button = () => {
+        axios.post('/logout').then(response => {
+            console.log('Logout succeful')
+
+            localStorage.removeItem('x_xsrf_token')
+
+            router.push('/')
+        }).catch(error => {
+            console.error('Ошибка при logout:', error.response)
+        })
+    }
 </script>

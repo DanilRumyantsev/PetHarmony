@@ -4,6 +4,11 @@ import vue from '@vitejs/plugin-vue';
 import vuetify from 'vite-plugin-vuetify';
 
 export default defineConfig({
+    input: [
+        'resources/js/app.js',
+        'resources/sass/app.scss', // Bootstrap
+        'resources/sass/vuetify.scss' // Vuetify
+    ],
     resolve: {
         alias: {
             'vue': 'vue/dist/vue.esm-bundler.js',
@@ -12,7 +17,9 @@ export default defineConfig({
     },
     plugins: [
         laravel({
-            input: 'resources/js/app.js',
+            input: ['resources/js/app.js',
+                    'resources/sass/app.scss',
+            ],
             refresh: true,
         }),
         vue({
@@ -24,7 +31,9 @@ export default defineConfig({
             },
         }),
         vuetify({
-            autoImport: true,
+            autoImport: true, styles: {
+                configFile: 'resources/sass/variables.scss' // Указываем файл переменных
+            }
         })
     ],
 });
