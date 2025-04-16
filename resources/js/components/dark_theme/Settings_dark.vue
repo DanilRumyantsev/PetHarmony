@@ -1,4 +1,4 @@
-<template>
+<template class="">
     <header class="header">
         <ul class="no-markers">
             <li class="li"><img src="/assets/logos/LOGO_short.svg" class="logo"></li>
@@ -12,20 +12,19 @@
         <h1 class="h1">Настройки</h1>
     </div>
     <div>
-        Тема
-        <v-switch label="Темная" inset></v-switch>
-            <v-btn class="button" 
-            v-bind="activatorProps" 
-            variant="flat">
-                Светлая
-            </v-btn>
-            <router-link to="/settings_dark" class="route">
+        <p>Тема</p>
+        <router-link to="/settings" class="route">
                         <v-btn class="button_dark" 
                         v-bind="activatorProps" 
                         variant="flat">
-                            Темная
+                            Светлая
                         </v-btn>
-            </router-link>
+        </router-link>
+        <v-btn class="button" 
+        v-bind="activatorProps" 
+        variant="flat">
+            Темная
+        </v-btn>
     </div>
 </template>
 
@@ -37,4 +36,13 @@
 
 <style>
 
+.button_dark{
+    background-color: #037247;
+    color: #C7FFBA;
+    width: 200px;
+    height: 50px;
+    border-radius: 20px;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
 </style>

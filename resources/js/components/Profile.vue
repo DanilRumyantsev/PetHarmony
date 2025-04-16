@@ -3,35 +3,40 @@
         <ul class="no-markers">
             <li class="li"><img src="/assets/logos/LOGO_short.svg" class="logo"></li>
             <li class="li">Профиль</li>
-            <li class="li"><router-link to="/categories"> Категории здоровья</router-link> </li>
-            <li class="li"><router-link to="/reports"> Отчеты</router-link></li>
-            <li class="li"><router-link to="/settings"> Настройки</router-link></li>
+            <li class="li"><router-link to="/categories" class="route"> Категории здоровья</router-link> </li>
+            <li class="li"><router-link to="/reports" class="route"> Отчеты</router-link></li>
+            <li class="li"><router-link to="/settings" class="route"> Настройки</router-link></li>
         </ul>
     </header>
 
-    <div class="person">
         <!-- <router-link to="/"> Выход</router-link> -->
+    <div class="head">
         <h1 class="h1">Профиль</h1>
+    </div>
+    <div class="person">  
         <div class="container_profile">
             <img src="/assets/images_pets/photo1.png" class="image">
             <div class="column">
                 <p>Имя пользователя: <span class="bold">Зоя Никифорова</span></p>
                 <p>Логин: <span class="bold">zoya_nikiforova</span></p>
-                <p>
-                    <v-btn
-                    @click.prevent="logout_button" 
-                    class="button_mini"
-                    text="Выйти"
-                    variant="flat"
-                    ></v-btn>
-                    <span>
-                    <v-btn
-                    class="button_mini"
-                    text="Редактировать"
-                    variant="flat"
-                    ></v-btn>
-                    </span>
-                </p>
+                <v-btn
+                @click.prevent="logout_button" 
+                class="button_mini"
+                text="Выйти"
+                variant="flat"
+                ></v-btn>
+                <router-link to="/" class="route">
+                    <v-btn class="button_mini" 
+                    v-bind="activatorProps" 
+                    variant="flat">
+                        Выйти
+                    </v-btn>
+                </router-link>
+                <v-btn
+                class="button_mini"
+                text="Редактировать"
+                variant="flat"
+                ></v-btn>
             </div>
             <div class="column">
                 <p>Телефон: <span class="bold">88008008888</span></p>
@@ -46,7 +51,6 @@
             </div>
         </div>
     </div>
-
     <div class="divider"></div>
 
     <div class="pet">
@@ -58,7 +62,10 @@
                 <p><v-btn class="button_mini"
                     text="Редактировать"
                     variant="flat"
-                ></v-btn></p>
+                ></v-btn>
+                <span>
+                <HealthRecord />
+                </span></p>
             </div>
             <div class="column">
                 <p>Окрас: <span class="bold">Черный</span></p>
@@ -78,7 +85,9 @@
 </template>
 
 <style>
-
+.route{
+    color: #037247;
+}
 .body_profile{
     display: flex;
     justify-content: center;
@@ -107,6 +116,13 @@
   width: 242px;
   height: 35px;
 }
+.head{
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  margin-top: 25px;
+  width: 1000px;
+}
 .h1{
     color:#037247;
     margin-bottom: 25px;
@@ -122,7 +138,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding-top: 45px;
+    padding-top: 25px;
 }
 .pet {
     margin: 0 auto;
@@ -159,7 +175,16 @@
     height: 35px;
     border-radius: 20px;
     font-size: 10px;
-    /* margin-bottom: 15px; */
+    margin-left: 5px;
+}
+.button{
+    background-color: #C7FFBA;
+    color: #037247;
+    width: 200px;
+    height: 50px;
+    border-radius: 20px;
+    font-size: 14px;
+    margin-bottom: 15px;
 }
 .button_div{
     display: flex;
@@ -171,6 +196,7 @@
     import axios from 'axios'
     import router from '../router/router'
     import Cookies from 'js-cookie'
+    import HealthRecord from './HealthRecord.vue';
 
     const items_clinics = ['ул. Пушкинская, д.72', '1-ая Барикадная, д.29', 'пер. Соборный, 94б', 'ул.Казахская, д.49']
     const items_pets = ['Коты, до 5 лет', 'Котята, до 2 лет']

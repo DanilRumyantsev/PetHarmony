@@ -7,7 +7,7 @@
         variant="flat"
       ></v-btn>
     </template>
-
+    
     <template v-slot:default="{ isActive }">
       <v-card title="Регистрация">
         <div class="container">
@@ -95,7 +95,7 @@
   import axios from 'axios'
   import Cookies from 'js-cookie'
   import { ref } from 'vue'
-import router from '../router/router'
+  import router from '../router/router'
   const dialog = ref(false)
   const name = ref(null)
   const email = ref(null)
