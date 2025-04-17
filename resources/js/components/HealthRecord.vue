@@ -7,7 +7,9 @@
       variant="flat"
     ></v-btn>
   </template>
-  <v-card
+
+  <template v-slot:default="{ isActive }">
+    <v-card 
     class="mx-auto"
     style="width: 500px;"
   >
@@ -15,8 +17,7 @@
       color="green"
       cards
       dark
-      flat
-    >
+      flat>
     <v-spacer></v-spacer>
       <v-card-title class="text-h6 font-weight-regular">
         Запись о здоровье
@@ -27,36 +28,25 @@
     <v-form
       ref="form"
       v-model="isValid"
-      class="pa-4 pt-6"
-    >
+      class="pa-4 pt-6">
       <v-text-field
-        v-model="password"
-        :rules="[rules.password, rules.length(6)]"
-        color="deep-purple"
-        counter="6"
-        label="Password"
+        v-model="date_1"
+        color="green"
+        label="Дата записи"
         style="min-height: 96px"
-        type="password"
+        type="text"
         variant="filled"
       ></v-text-field>
       <v-text-field
-        v-model="phone"
-        color="deep-purple"
-        label="Phone number"
-        variant="filled"
-      ></v-text-field>
-      <v-text-field
-        v-model="email"
-        :rules="[rules.email]"
-        color="deep-purple"
-        label="Email address"
-        type="email"
+        v-model="date_2"
+        color="green"
+        label="Дата последней прививки"
         variant="filled"
       ></v-text-field>
       <v-textarea
         v-model="bio"
-        color="deep-purple"
-        label="Bio"
+        color="green"
+        label="Описание"
         rows="1"
         variant="filled"
         auto-grow
@@ -66,24 +56,24 @@
     <v-card-actions>
       <v-btn
         variant="text"
-        @click="form.reset()"
-      >
-        Clear
+        @click="form.reset()">
+        Очистить
       </v-btn>
       <v-btn
-          text="Закрыть"
-          @click="isActive.value = false"
-        ></v-btn>
+        text="Закрыть"
+        @click="isActive.value = false"
+      ></v-btn>
       <v-spacer></v-spacer>
       <v-btn
         :disabled="!isValid"
         :loading="isLoading"
-        color="green"
-      >
-        Submit
+        color="green">
+        Сохранить
       </v-btn>
     </v-card-actions>
     </v-card>
+  </template>
+  
 </v-dialog>
   
 </template>
@@ -91,21 +81,14 @@
 <script setup>
   import { ref } from 'vue'
 
-  const rules = {
-    email: v => !!(v || '').match(/@/) || 'Please enter a valid email',
-    length: len => v => (v || '').length >= len || `Invalid character length, required ${len}`,
-    password: v => !!(v || '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/) || 'Password must contain an upper case letter, a numeric character, and a special character',
-    required: v => !!v || 'This field is required',
-  }
-
   const form = ref()
 
   const agreement = ref(false)
-  const bio = ref('Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts')
+  const bio = ref('Добавьте сюда информацию о состоянии здоровья вашего питомца')
   const dialog = ref(false)
-  const email = ref()
   const isValid = ref(false)
   const isLoading = ref(false)
-  const password = ref()
-  const phone = ref()
+  const date_1 = ref()
+  const date_2 = ref()
+
 </script>

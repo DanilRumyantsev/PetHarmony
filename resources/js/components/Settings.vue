@@ -13,26 +13,12 @@
     </div>
     <div>
         Тема
-        <v-switch label="Темная" inset></v-switch>
-            <v-btn class="button" 
-            v-bind="activatorProps" 
-            variant="flat">
-                Светлая
-            </v-btn>
-            <router-link to="/settings_dark" class="route">
-                        <v-btn class="button_dark" 
-                        v-bind="activatorProps" 
-                        variant="flat">
-                            Темная
-                        </v-btn>
-            </router-link>
+        <div class="switcher"> Светлая <v-switch label="Темная" inset></v-switch> </div>
     </div>
 </template>
 
 <script>
-    export default {
-        
-    }
+
 </script>
 
 <style>

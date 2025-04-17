@@ -16,7 +16,7 @@
     
     <div class="person">  
         <div class="container_profile">
-            <img src="/assets/images_pets/photo1.png" class="image">
+            <img src="/assets/images_pets/icon_person.svg" class="image">
             <div class="column">
                 <p>Имя пользователя: <span class="bold">{{ user.name }}</span></p>
                 <p>Почта: <span class="bold">{{ user.email }}</span></p>
