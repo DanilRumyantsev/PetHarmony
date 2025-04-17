@@ -18,7 +18,7 @@ const vuetify = createVuetify({
     locale: {
         locale: 'ru',
         messages: { ru }
-      },
+    },
 });
 
 export default vuetify;

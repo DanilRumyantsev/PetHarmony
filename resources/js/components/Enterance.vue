@@ -9,7 +9,7 @@
   </template>
 
   <template v-slot:default="{ isActive }">
-    <v-card title="Вход">
+    <v-card title="Вход" class="enterance">
         <div class="container">
             <v-sheet class="mx-auto" width="350">
                 <v-form @submit.prevent>

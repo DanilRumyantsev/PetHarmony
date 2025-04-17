@@ -9,7 +9,7 @@
     </template>
 
     <template v-slot:default="{ isActive }">
-      <v-card title="Регистрация">
+      <v-card title="Регистрация" class="registration">
         <div class="container">
           <v-form @submit.prevent>
             <v-sheet class="mx-auto" width="350">
@@ -68,7 +68,6 @@
   padding: 10px;
 }
 .button{
-    background-color: #C7FFBA;
     color: #037247;
     width: 200px;
     height: 50px;
@@ -88,6 +87,9 @@
 }
 .v-btn {
   background-color: #C7FFBA;
+}
+.registration {
+  color:#037247
 }
 </style>
 

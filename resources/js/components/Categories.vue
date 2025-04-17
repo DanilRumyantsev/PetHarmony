@@ -50,7 +50,7 @@ const addCategoryToList = (newCategory) => {
         md="4"
       >
         <v-card
-          class="mx-auto"
+          class="mx-auto category_card"
           width="300"
           :subtitle="`Возраст: ${category.description}`"
           :title="category.name_category"

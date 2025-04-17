@@ -8,8 +8,6 @@
             <li class="li"><router-link to="/settings" class="route"> Настройки</router-link></li>
         </ul>
     </header>
-
-        <!-- <router-link to="/"> Выход</router-link> -->
     <div class="head">
         <h1 class="h1">Профиль</h1>
     </div>
@@ -34,7 +32,6 @@
             </div>
             <div class="column">
                 <p>Телефон: <span class="bold">{{ user.phone || 'Не указан' }}</span></p>
-                <p>Почта: <span class="bold">nikiforova@example.com</span></p>
                 <p class="select">
                 <v-select
                     :items="items_clinics"
@@ -89,7 +86,7 @@ body {
     justify-content: center;
 }
 .header{
-    margin: 0 auto;
+    margin: 10px auto;
     background-color: #C7FFBA;
     width: 1000px;
     height: 55px;
@@ -214,6 +211,7 @@ import router from '../router/router';
 import Cookies from 'js-cookie';
 import HealthRecord from './HealthRecord.vue';
 import CreatePet from './CreatePet.vue';
+import Header from './Header.vue';
 
 const items_clinics = ['ул. Пушкинская, д.72', '1-ая Барикадная, д.29', 'пер. Соборный, 94б', 'ул.Казахская, д.49'];
 const user = ref({});

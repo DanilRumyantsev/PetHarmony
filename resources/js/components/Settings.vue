@@ -12,15 +12,85 @@
         <h1 class="h1">Настройки</h1>
     </div>
     <div>
-        Тема
-        <div class="switcher"> Светлая <v-switch label="Темная" inset></v-switch> </div>
+        
+        <!-- <div class="switcher"> Светлая  </div> -->
+
+        <!-- <v-switch label="Темная" inset></v-switch> -->
+        <button @click="toggleDark()" class="button_dark">
+            Темная тема
+        </button>
     </div>
+
+
 </template>
 
-<script>
+<script setup>
+import { useDark, useToggle } from "@vueuse/core";
 
+const isDark = useDark();
+const toggleDark = useToggle(isDark);
 </script>
 
 <style>
-
+.dark body {
+  background: #0B2F21;
+  color: #EAFFEA;
+}
+.dark .header  {
+    background: #037247; /* Цвет фона для темной темы */
+    color: #037247;
+    border-radius: 20px; /* Цвет текста для темной темы */
+}
+.dark .route{
+    color: #037247;
+}
+.dark .li {
+    filter: invert(42%) sepia(61%) saturate(7500%) hue-rotate(86deg) brightness(100%) contrast(79%);
+}
+.dark .h1 {
+    color: #C7FFBA;
+}
+.dark .v-date-picker {
+    background-color: #0B2F21;
+    color: #EAFFEA;
+    /* filter: invert(13%) sepia(48%) saturate(7500%) hue-rotate(86deg) brightness(100%) contrast(79%); */
+}
+.dark .image_main{
+    filter: invert(42%) sepia(61%) saturate(7500%) hue-rotate(86deg) brightness(100%) contrast(79%);
+}
+.dark .text_main{
+    filter: invert(42%) sepia(61%) saturate(7500%) hue-rotate(86deg) brightness(100%) contrast(79%);
+}
+.dark, .container_main{
+   background-color: #0B2F21; 
+}
+/* .dark .registration{
+    background-color: #037247;
+    color: #EAFFEA;
+} */
+/* .dark .enterance{
+    background-color: #037247;
+    color: #EAFFEA;
+} */
+/* .dark .v-form *{
+    background-color: #037247;
+    color: #EAFFEA;
+} */
+.dark .v-btn{
+    background-color: #037247; 
+    color: #EAFFEA;
+}
+.dark .category_card{
+    background-color: #037247; 
+    color: #EAFFEA;
+}
+.button_dark{
+     background-color: #037247;
+     color: #C7FFBA;
+     width: 200px;
+     height: 50px;
+     border-radius: 20px;
+     font-size: 14px;
+     margin-bottom: 15px;
+ }
 </style>
