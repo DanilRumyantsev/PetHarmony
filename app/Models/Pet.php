@@ -10,7 +10,7 @@ class Pet extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'id_pet';
+    protected $primaryKey = 'id';
     protected $fillable = ['name_pet', 'color', 'birth_date', 'category_id', 'image'];
 
     public function user()
@@ -20,6 +20,6 @@ class Pet extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class, 'id');
+        return $this->belongsTo(Category::class, 'category_id');
     }
 }

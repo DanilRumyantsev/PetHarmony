@@ -34,7 +34,6 @@
             </div>
             <div class="column">
                 <p>Телефон: <span class="bold">{{ user.phone || 'Не указан' }}</span></p>
-                <p>Почта: <span class="bold">nikiforova@example.com</span></p>
                 <p class="select">
                 <v-select
                     :items="items_clinics"
@@ -70,8 +69,6 @@
     <div class="pet__add">
         <CreatePet />
     </div>
-    <v-file-upload clearable density="compact" variant="compact"></v-file-upload>
-
 
 
 </template>

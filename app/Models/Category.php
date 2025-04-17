@@ -13,6 +13,6 @@ class Category extends Model
 
     public function pets()
     {
-        return $this->hasMany(Pet::class, 'id_category');
+        return $this->hasMany(Pet::class, 'category_id');
     }
 }
