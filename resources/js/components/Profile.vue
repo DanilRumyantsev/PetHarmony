@@ -49,7 +49,7 @@
 
     <div v-for="pet in pets" :key="pet.id_pet" class="pet">
       <div class="container_pet">
-        <img src="/assets/images_pets/pet1.png" class="image" />
+        <img src="/assets/images_pets/icon_pet.svg" class="image" />
         <div class="column">
           <p>Имя: <span class="bold">{{ pet.name_pet }}</span></p>
           <p>Идентификатор: <span class="bold">{{ pet.id_pet }}</span></p>
