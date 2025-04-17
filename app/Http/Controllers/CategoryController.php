@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
+    public function index()
+    {
+        return Category::all();
+    }
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -19,11 +24,6 @@ class CategoryController extends Controller
         $category = Category::create($validatedData);
 
         return response()->json($category, 201);
-    }
-    
-    public function index()
-    {
-        return Category::all();
     }
 
     public function destroy($id)
@@ -39,5 +39,15 @@ class CategoryController extends Controller
         }
 
         return response()->json(['message' => 'Category deleted successfully']);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $category = Category::findOrFail($id);
+        $category->name_category = $request->name_category;
+        $category->description = $request->description;
+        $category->save();
+
+        return response()->json($category, 200);
     }
 }

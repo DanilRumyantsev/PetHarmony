@@ -67,8 +67,6 @@
     <div class="pet__add">
         <CreatePet />
     </div>
-    <v-file-upload clearable density="compact" variant="compact"></v-file-upload>
-
 
 
 </template>
