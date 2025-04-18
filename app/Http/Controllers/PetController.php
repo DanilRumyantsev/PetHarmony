@@ -37,4 +37,24 @@ class PetController extends Controller
     {
         return $request->user()->pets;
     }
+
+    public function update(Request $request, $id)
+    {
+        $pet = Pet::findOrFail($id);
+        $pet->name_pet = $request->name_pet;
+        $pet->color = $request->color;
+        $pet->birth_date = $request->birth_date;
+        $pet->category_id = $request->category_id;
+        $pet->save();
+
+        return response()->json($pet, 200);
+    }
+
+    public function destroy($id)
+    {
+        $pet = Pet::findOrFail($id);
+        $pet->delete();
+
+        return response()->json(['message' => 'Животное успешно удалено'], 200);
+    }
 }

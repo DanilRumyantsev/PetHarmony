@@ -2,11 +2,9 @@
     <v-dialog max-width="400" v-model="dialog">
       <template v-slot:activator="{ props: activatorProps }">
         <v-btn
-          class="button"
-          density="compact"
-          icon="mdi-pencil"
           v-bind="activatorProps"
-          text="Редактировать"
+          class="button"
+          text="Редактировать питомца"
           variant="flat"
         ></v-btn>
       </template>
@@ -43,8 +41,8 @@
             </v-sheet>
   
             <v-sheet class="mx-auto" width="350">
-              <v-date-input
-                v-model="birthDate"
+                <v-date-input
+                v-model="date"
                 :formatDate="formatDate"
                 clearable
                 placeholder="дд.мм.гг"
@@ -52,13 +50,12 @@
                 required
               ></v-date-input>
             </v-sheet>
-  
-            <v-btn class="mt-2" type="submit" block>Сохранить</v-btn>
-          </v-form>
+            </v-form>
         </div>
   
         <v-card-actions>
           <v-spacer></v-spacer>
+          <v-btn text="Сохранить" @click="updatePet"></v-btn>
           <v-btn text="Закрыть" @click="dialog = false"></v-btn>
         </v-card-actions>
       </v-card>
@@ -66,58 +63,61 @@
   </template>
   
   <script setup>
-  import axios from 'axios';
-  import { ref, watch } from 'vue';
-  
-  const props = defineProps(['pet', 'categories']);
-  const emit = defineEmits(['pet-updated']);
-  
-  const dialog = ref(false);
-  const namePet = ref('');
-  const color = ref('');
-  const birthDate = ref('');
-  const category = ref(null);
-  
-  // Предзаполнение значений
-  watch(() => props.pet, (newVal) => {
-    if (newVal) {
-      namePet.value = newVal.name_pet;
-      color.value = newVal.color;
-      birthDate.value = newVal.birth_date;
-      category.value = newVal.category_id;
-    }
-  }, { immediate: true });
-  
-  const updatePet = () => {
-    axios.put(`/api/pets/${props.pet.id_pet}`, {
-      name_pet: namePet.value,
-      color: color.value,
-      birth_date: birthDate.value,
-      category_id: category.value
-    }).then(response => {
-      console.log('Питомец обновлен:', response.data);
-      emit('pet-updated', response.data);
-      dialog.value = false;
-    }).catch(error => {
-      console.error('Ошибка при обновлении питомца:', error);
-    });
-  };
-  
-  const formatDate = (value) => {
-    if (!value) return '';
-    const d = new Date(value);
-    const day = String(d.getDate()).padStart(2, '0');
-    const month = String(d.getMonth() + 1).padStart(2, '0');
-    const year = String(d.getFullYear()).slice(-2); // последние 2 цифры года
-    return `${day}/${month}/${year}`;
-  };
-  </script>
-  
-  <style scoped>
-  .button {
-    background-color: #C7FFBA;
-    color: #037247;
-    font-size: 14px;
-    margin-bottom: 15px;
+import axios from 'axios';
+import { ref, watch } from 'vue';
+
+const props = defineProps(['pet', 'categories']);
+const emit = defineEmits(['pet-updated']);
+
+const dialog = ref(false);
+const namePet = ref('');
+const color = ref('');
+const birthDate = ref('');
+const category = ref(null);
+
+// Предзаполнение значений
+watch(() => props.pet, (newVal) => {
+  if (newVal) {
+    namePet.value = newVal.name_pet;
+    color.value = newVal.color;
+    birthDate.value = newVal.birth_date;
+    category.value = newVal.category_id;
   }
-  </style>
+}, { immediate: true });
+
+const updatePet = () => {
+  axios.put(`/api/pets/${props.pet.id}`, {
+    name_pet: namePet.value,
+    color: color.value,
+    birth_date: birthDate.value,
+    category_id: category.value ? category.value.id : null // Передаем только id категории
+  }).then(response => {
+    console.log('Питомец обновлен:', response.data);
+    emit('pet-updated', response.data);
+    dialog.value = false;
+  }).catch(error => {
+    console.error('Ошибка при обновлении питомца:', error);
+  });
+};
+
+const formatDate = (value) => {
+  if (!value) return '';
+  const d = new Date(value);
+  const day = String(d.getDate()).padStart(2, '0');
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const year = String(d.getFullYear()).slice(-2); // последние 2 цифры года
+  return `${day}/${month}/${year}`;
+};
+</script>
+
+<style scoped>
+.button {
+    background-color: #EAFFEA;
+    color: #037247;
+    width: fit;
+    height: 35px;
+    border-radius: 20px;
+    font-size: 10px;
+    margin-right: 5px;
+}
+</style>

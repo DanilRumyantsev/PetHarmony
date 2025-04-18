@@ -6,6 +6,7 @@ use App\Http\Controllers\GetController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PetController;
 use App\Http\Controllers\CategoryController;
+Use App\Http\Controllers\HealthRecordController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -23,7 +24,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/pets', [PetController::class, 'index']);
     Route::post('/pets', [PetController::class, 'store']);
     Route::put('/pets/{id}', [PetController::class, 'update']);
+    Route::delete('/pets/{id}', [PetController::class, 'destroy']);
     Route::put('/health_records/{id}', [HealthRecordController::class, 'update']);
+    Route::post('/health_records', [HealthRecordController::class, 'store']);
 });
 
 // Маршрут для вывода и создания категорий

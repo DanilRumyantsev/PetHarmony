@@ -6,13 +6,11 @@
 <template>
 
 <div class="body_main">
-    <!-- <router-link to="/get">Get</router-link> -->
     <v-card class="container_main">
         <img src="/assets/logos/LOGO.svg" class="image_main">
         <p class="text_main">Добро пожаловать!</p>
         <Registration />
         <Enterance />
-        <!-- <router-link to="/profile"> На сайт</router-link> -->
     </v-card>
 </div>
 

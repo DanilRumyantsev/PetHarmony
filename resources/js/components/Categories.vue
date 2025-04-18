@@ -108,6 +108,9 @@ onMounted(() => {
 .v-card {
   background-color: #E8E8E8;
 }
+.category_card {
+  padding: 10px;
+}
 .createCategory {
   margin: 0 auto;
 }

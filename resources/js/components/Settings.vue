@@ -15,7 +15,7 @@
         
         <!-- <div class="switcher"> Светлая  </div> -->
 
-        <!-- <v-switch label="Темная" inset></v-switch> -->
+        <!-- <v-switch @click.prevent="toggleDark" label="Темная" inset></v-switch> -->
         <button @click="toggleDark()" class="button_dark">
             Темная тема
         </button>
@@ -81,8 +81,15 @@ const toggleDark = useToggle(isDark);
     color: #EAFFEA;
 }
 .dark .category_card{
-    background-color: #037247; 
+    background-color: #0B2F21;
+    box-shadow: 0px 0px 10px #C7FFBA;
     color: #EAFFEA;
+}
+.dark .container_profile {
+    box-shadow: 0px 0px 10px #C7FFBA;
+}
+.dark .container_pet {
+    box-shadow: 0px 0px 10px #C7FFBA;
 }
 .button_dark{
      background-color: #037247;

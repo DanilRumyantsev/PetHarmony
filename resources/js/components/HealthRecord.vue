@@ -9,15 +9,37 @@
       ></v-btn>
     </template>
 
-    <v-card title="Редактирование записи о здоровье">
+    <v-card :title="record ? 'Редактирование записи о здоровье' : 'Создание записи о здоровье'">
       <div class="container">
-        <v-form @submit.prevent="updateHealthRecord">
+        <v-form @submit.prevent="saveHealthRecord">
           <v-sheet class="mx-auto" width="350">
             <v-textarea
               v-model="description"
               label="Описание"
               required
             ></v-textarea>
+          </v-sheet>
+
+          <v-sheet class="mx-auto" width="350">
+            <v-date-input
+              v-model="recordDate"
+              :formatDate="formatDate"
+              clearable
+              placeholder="дд.мм.гг"
+              label="Дата записи"
+              required
+            ></v-date-input>
+          </v-sheet>
+
+          <v-sheet class="mx-auto" width="350">
+            <v-date-input
+              v-model="vaccinationDate"
+              :formatDate="formatDate"
+              clearable
+              placeholder="дд.мм.гг"
+              label="Дата прививки"
+              required
+            ></v-date-input>
           </v-sheet>
 
           <v-btn class="mt-2" type="submit" block>Сохранить</v-btn>
@@ -36,37 +58,61 @@
 import axios from 'axios';
 import { ref, watch } from 'vue';
 
-const props = defineProps(['record']);
-const emit = defineEmits(['record-updated']);
+const props = defineProps(['record', 'petId']); // Убедитесь, что petId передается
+const emit = defineEmits(['record-updated', 'record-created']);
 
 const dialog = ref(false);
 const description = ref('');
+const recordDate = ref('');
+const vaccinationDate = ref('');
 
 // Предзаполнение значений
 watch(() => props.record, (newVal) => {
   if (newVal) {
     description.value = newVal.description;
+    recordDate.value = newVal.record_date;
+    vaccinationDate.value = newVal.vaccination_date;
   }
 }, { immediate: true });
 
-const updateHealthRecord = () => {
-  axios.put(`/api/health_records/${props.record.id}`, {
-    description: description.value
-  }).then(response => {
-    console.log('Запись о здоровье обновлена:', response.data);
-    emit('record-updated', response.data);
-    dialog.value = false;
-  }).catch(error => {
-    console.error('Ошибка при обновлении записи о здоровье:', error);
-  });
+const saveHealthRecord = () => {
+  const data = {
+    description: description.value,
+    record_date: recordDate.value,
+    vaccination_date: vaccinationDate.value,
+    id_pet: props.petId // Убедитесь, что petId передается
+  };
+
+  console.log('Sending data:', data); // Логирование данных перед отправкой
+
+  if (props.record && props.record.id) {
+    axios.put(`/api/health_records/${props.record.id}`, data).then(response => {
+      console.log('Запись о здоровье обновлена:', response.data);
+      emit('record-updated', response.data);
+      dialog.value = false;
+    }).catch(error => {
+      console.error('Ошибка при обновлении записи о здоровье:', error);
+    });
+  } else {
+    axios.post('/api/health_records', data).then(response => {
+      console.log('Запись о здоровье создана:', response.data);
+      emit('record-created', response.data);
+      dialog.value = false;
+    }).catch(error => {
+      console.error('Ошибка при создании записи о здоровье:', error);
+    });
+  }
 };
 </script>
 
 <style scoped>
-  .button {
-    background-color: #C7FFBA;
-    color: #037247;
-    font-size: 14px;
-    margin-bottom: 15px;
-  }
+.button {
+  background-color: #EAFFEA;
+  color: #037247;
+  width: fit;
+  height: 35px;
+  border-radius: 20px;
+  font-size: 10px;
+  margin-right: 5px;
+}
 </style>

@@ -44,24 +44,23 @@
     </div>
     <div class="divider"></div>
 
-    <div v-for="pet in pets" :key="pet.id_pet" class="pet">
+    <div v-for="pet in pets" :key="pet.id" class="pet">
       <div class="container_pet">
         <img src="/assets/images_pets/icon_pet.svg" class="image" />
         <div class="column">
           <p>Имя: <span class="bold">{{ pet.name_pet }}</span></p>
-          <p>Идентификатор: <span class="bold">{{ pet.id_pet }}</span></p>
-          <p>
-            <v-btn class="button_mini" text="Редактировать" variant="flat"></v-btn>
-            <span>
-              <HealthRecord />
-            </span>
-          </p>
+          <p>Идентификатор: <span class="bold">{{ pet.id }}</span></p>
+          <div class="pets_buttons_control">
+            <EditPet :pet="pet" :categories="categories" @pet-updated="updatePetInList" />
+            <HealthRecord :record="pet.health_record" @record-updated="updateHealthRecordInList" />
+          </div>
         </div>
         <div class="column">
           <p>Окрас: <span class="bold">{{ pet.color }}</span></p>
           <p>Дата рождения: <span class="bold">{{ pet.birth_date }}</span></p>
           <p>Категория: <span class="bold">{{ getCategoryName(pet.category_id) }}</span></p>
         </div>
+        <v-btn class="delete_pet" @click="deletePet(pet.id)" icon="mdi-close" density="compact" variant="flat"></v-btn>
       </div>
     </div>
     <div class="pet__add">
@@ -192,6 +191,10 @@ body {
     font-size: 14px;
     margin-bottom: 15px;
 }
+.pets_buttons_control {
+  display: flex;
+  justify-content: center;
+}
 .button_div{
     display: flex;
     justify-content: center;
@@ -199,6 +202,9 @@ body {
 .pet__add {
     text-align: center;
     margin: 5px auto;
+}
+.delete_pet {
+  margin-bottom: 150px;
 }
 </style>
 
@@ -209,16 +215,37 @@ import router from '../router/router';
 import Cookies from 'js-cookie';
 import HealthRecord from './HealthRecord.vue';
 import CreatePet from './CreatePet.vue';
+import EditPet from './EditPet.vue';
 import Header from './Header.vue';
 
 const items_clinics = ['ул. Пушкинская, д.72', '1-ая Барикадная, д.29', 'пер. Соборный, 94б', 'ул.Казахская, д.49'];
 const user = ref({});
 const pets = ref([]);
 const categories = ref([]);
+
+const addPetToList = (newPet) => {
+  pets.value.push(newPet);
+};
+
+const updatePetInList = (updatedPet) => {
+  const index = pets.value.findIndex(pet => pet.id === updatedPet.id);
+  if (index !== -1) {
+    pets.value.splice(index, 1, updatedPet);
+  }
+};
+
+const updateHealthRecordInList = (updatedRecord) => {
+  // Обновление записи о здоровье в списке питомцев
+  const pet = pets.value.find(p => p.id === updatedRecord.id_pet);
+  if (pet) {
+    pet.health_record = updatedRecord;
+  }
+};
+
 const getCategoryName = (id) => {
-  const category = categories.value.find(cat => cat.id === id)
-  return category ? category.name_category : 'Неизвестно'
-}
+  const category = categories.value.find(cat => cat.id === id);
+  return category ? category.name_category : 'Неизвестно';
+};
 
 const logout_button = () => {
   axios.post('/logout').then(response => {
@@ -230,19 +257,34 @@ const logout_button = () => {
   });
 };
 
+const deletePet = async (id) => {
+  try {
+    await axios.delete(`/api/pets/${id}`);
+    // Удаление животного из списка на фронтенде
+    pets.value = pets.value.filter(pet => pet.id !== id);
+    console.log('Животное успешно удалено');
+  } catch (error) {
+    console.error('Ошибка при удалении животного:', error);
+  }
+};
+
 onMounted(() => {
   axios.get('/api/user').then(response => {
     user.value = response.data;
   }).catch(error => {
     console.error('Ошибка при загрузке данных пользователя:', error);
   });
+
   axios.get('/api/pets').then(response => {
-    pets.value = response.data
+    pets.value = response.data;
   }).catch(error => {
-    console.error('Ошибка при загрузке животных:', error)
-  })
+    console.error('Ошибка при загрузке животных:', error);
+  });
+
   axios.get('/api/categories').then(response => {
-    categories.value = response.data
-  })
+    categories.value = response.data;
+  }).catch(error => {
+    console.error('Ошибка при загрузке категорий:', error);
+  });
 });
 </script>
