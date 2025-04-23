@@ -37,9 +37,9 @@ const toggleDark = useToggle(isDark);
   color: #EAFFEA;
 }
 .dark .header  {
-    background: #037247; /* Цвет фона для темной темы */
+    background: #037247; 
     color: #037247;
-    border-radius: 20px; /* Цвет текста для темной темы */
+    border-radius: 20px; 
 }
 .dark .route{
     color: #037247;
@@ -53,7 +53,6 @@ const toggleDark = useToggle(isDark);
 .dark .v-date-picker {
     background-color: #0B2F21;
     color: #EAFFEA;
-    /* filter: invert(13%) sepia(48%) saturate(7500%) hue-rotate(86deg) brightness(100%) contrast(79%); */
 }
 .dark .image_main{
     filter: invert(42%) sepia(61%) saturate(7500%) hue-rotate(86deg) brightness(100%) contrast(79%);
@@ -61,21 +60,21 @@ const toggleDark = useToggle(isDark);
 .dark .text_main{
     filter: invert(42%) sepia(61%) saturate(7500%) hue-rotate(86deg) brightness(100%) contrast(79%);
 }
-.dark, .container_main{
+/* .dark, .container_main{
    background-color: #0B2F21; 
+} */
+.dark .registration{
+    background-color: #037247;
+    color: #EAFFEA;
 }
-/* .dark .registration{
+.dark .enterance{
     background-color: #037247;
     color: #EAFFEA;
-} */
-/* .dark .enterance{
+}
+.dark .v-form *{
     background-color: #037247;
     color: #EAFFEA;
-} */
-/* .dark .v-form *{
-    background-color: #037247;
-    color: #EAFFEA;
-} */
+}
 .dark .v-btn{
     background-color: #037247; 
     color: #EAFFEA;
