@@ -20,7 +20,10 @@
             Темная тема
         </button>
     </div>
-
+    <div>
+    <button @click="changeFont" class="button">Сменить шрифт</button>
+    <p :style="{ fontFamily: currentFont }">Вот так будет выглядить шрифт в Вашем профиле.</p>
+  </div>
 
 </template>
 
@@ -29,8 +32,30 @@ import { useDark, useToggle } from "@vueuse/core";
 
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
-</script>
 
+</script>
+<script>
+
+import { mapGetters } from 'vuex';
+
+export default {
+  computed: {
+    ...mapGetters(['currentFont'])
+  },
+  data() {
+    return {
+      fonts: ['Arial', 'Courier New', 'Franklin Gothic Medium', 'Georgia', 'Sans'] // Список доступных шрифтов
+    };
+  },
+  methods: {
+    changeFont() {
+      const currentIndex = this.fonts.indexOf(this.currentFont);
+      const nextIndex = (currentIndex + 1) % this.fonts.length;
+      this.$store.dispatch('changeFont', this.fonts[nextIndex]);
+    }
+  }
+};
+</script>
 <style>
 .dark body {
   background: #0B2F21;
@@ -63,6 +88,10 @@ const toggleDark = useToggle(isDark);
 /* .dark, .container_main{
    background-color: #0B2F21; 
 } */
+ .dark .v-card {
+    background-color: #037247;
+    color: #EAFFEA;
+ }
 .dark .registration{
     background-color: #037247;
     color: #EAFFEA;

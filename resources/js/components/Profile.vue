@@ -12,7 +12,7 @@
         <h1 class="h1">Профиль</h1>
     </div>
     
-    <div class="person">  
+    <div class="person" :style="{ fontFamily: currentFont }">  
         <div class="container_profile">
             <img src="/assets/images_pets/icon_person.svg" class="image">
             <div class="column">
@@ -45,10 +45,10 @@
     <div class="divider"></div>
 
     <div v-for="pet in pets" :key="pet.id" class="pet">
-      <div class="container_pet">
+      <div class="container_pet" :style="{ fontFamily: currentFont }">
         <img src="/assets/images_pets/icon_pet.svg" class="image" />
         <div class="column">
-          <p>Имя: <span class="bold">{{ pet.name_pet }}</span></p>
+          <p >Имя: <span class="bold">{{ pet.name_pet }}</span></p>
           <p>Идентификатор: <span class="bold">{{ pet.id }}</span></p>
           <div class="pets_buttons_control">
             <EditPet :pet="pet" :categories="categories" @pet-updated="updatePetInList" />
@@ -158,7 +158,7 @@ body {
 }
 .column {
   flex: 1;
-  margin: 0px 50px;
+  margin: 0px 35px;
 }
 .bold {
   font-weight: bold;
@@ -207,7 +207,15 @@ body {
   margin-bottom: 150px;
 }
 </style>
+<script>
+import { mapGetters } from 'vuex';
 
+export default {
+  computed: {
+    ...mapGetters(['currentFont'])
+  }
+}
+</script>
 <script setup>
 import axios from 'axios';
 import { ref, onMounted } from 'vue';

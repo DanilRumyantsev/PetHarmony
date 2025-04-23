@@ -8,6 +8,7 @@ import * as components from 'vuetify/components';
 import * as directives from 'vuetify/directives';
 import customVuetify from './plugins/vuetify'; // Импортируем настроенный Vuetify
 import router from './router/router.js';
+import store from './store.js';
 import FirstWindow from "./components/FirstWindow.vue";
 import axios from 'axios';
 const vuetifyInstance = createVuetify({
@@ -25,4 +26,5 @@ app.component('FirstWindow', FirstWindow);
 app
     .use(router)
     .use(customVuetify)
+    .use(store)
     .mount('#app');

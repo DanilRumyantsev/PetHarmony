@@ -42,7 +42,7 @@
             ></v-date-input>
           </v-sheet>
 
-          <v-btn class="mt-2" type="submit" block>Сохранить</v-btn>
+          <v-btn class="mt-2 save_btn" type="submit" block>Сохранить</v-btn>
         </v-form>
       </div>
 
