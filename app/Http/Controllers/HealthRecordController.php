@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HealthRecord;
 use Illuminate\Http\Request;
 
 class HealthRecordController extends Controller
@@ -9,8 +10,7 @@ class HealthRecordController extends Controller
     public function update(Request $request, $id)
     {
         $record = HealthRecord::findOrFail($id);
-        $record->description = $request->description;
-        $record->save();
+        $record->update($request->all());
 
         return response()->json($record, 200);
     }

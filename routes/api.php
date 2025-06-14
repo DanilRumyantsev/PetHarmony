@@ -1,12 +1,13 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\GetController;
+use App\Http\Controllers\HealthRecordController;
+use App\Http\Controllers\PetController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\GetController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\PetController;
-use App\Http\Controllers\CategoryController;
-Use App\Http\Controllers\HealthRecordController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -18,6 +19,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 // Вывод существующих пользователей
 Route::middleware('auth:sanctum')->get('/user', [UserController::class, 'show']);
+Route::get('/users', [UserController::class, 'index']);
 
 // Маршрут для создания и привязки животного к пользователю
 Route::middleware('auth:sanctum')->group(function () {
@@ -36,3 +38,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/categories/{id}', [CategoryController::class, 'destroy']);
     Route::put('/categories/{id}', [CategoryController::class, 'update']);
 });
+
+Route::post('/reports/generate', [ReportController::class, 'generateReport'])->middleware('auth:api');

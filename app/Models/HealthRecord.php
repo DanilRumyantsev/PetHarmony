@@ -2,13 +2,19 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class HealthRecord extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id_pet', 'name_pet', 'description'];
+    protected $fillable = [
+        'description',
+        'record_date',
+        'vaccination_date',
+        'id_pet',
+    ];
 
     public function pet()
     {
